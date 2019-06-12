@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FootBallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Reyler" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="tapsiriq" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="musteri_id" Type="Int32" />
+    <NavigationProperty Name="Musteri" Relationship="Self.FK_comments_Musteri" FromRole="comments" ToRole="Musteri" />
+  </EntityType>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="Int32" />
+    <NavigationProperty Name="comments" Relationship="Self.FK_comments_Musteri" FromRole="Musteri" ToRole="comments" />
+    <NavigationProperty Name="Rezervs" Relationship="Self.FK_Rezerv_Musteri" FromRole="Musteri" ToRole="Rezerv" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reports_date" Type="DateTime" Precision="0" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="reserv_id" Type="Int32" />
+    <NavigationProperty Name="Rezerv" Relationship="Self.FK_Reports_Rezerv" FromRole="Reports" ToRole="Rezerv" />
+  </EntityType>
+  <EntityType Name="Rezerv">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="musteri_id" Type="Int32" />
+    <Property Name="reserv_date" Type="DateTime" Precision="0" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="rooms_id" Type="Int32" />
+    <Property Name="stadium_id" Type="Int32" />
+    <NavigationProperty Name="Musteri" Relationship="Self.FK_Rezerv_Musteri" FromRole="Rezerv" ToRole="Musteri" />
+    <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_Rezerv" FromRole="Rezerv" ToRole="Reports" />
+    <NavigationProperty Name="room" Relationship="Self.FK_Rezerv_rooms" FromRole="Rezerv" ToRole="rooms" />
+    <NavigationProperty Name="Stadium" Relationship="Self.FK_Rezerv_Stadium" FromRole="Rezerv" ToRole="Stadium" />
+  </EntityType>
+  <EntityType Name="room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="skaf_sayi" Type="Int32" />
+    <Property Name="status" Type="Byte" />
+    <NavigationProperty Name="Rezervs" Relationship="Self.FK_Rezerv_rooms" FromRole="rooms" ToRole="Rezerv" />
+  </EntityType>
+  <EntityType Name="Stadium">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="status" Type="Byte" />
+    <NavigationProperty Name="Rezervs" Relationship="Self.FK_Rezerv_Stadium" FromRole="Stadium" ToRole="Rezerv" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_comments_Musteri">
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+    <End Role="comments" Type="Self.comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="comments">
+        <PropertyRef Name="musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezerv_Musteri">
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+    <End Role="Rezerv" Type="Self.Rezerv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rezerv">
+        <PropertyRef Name="musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reports_Rezerv">
+    <End Role="Rezerv" Type="Self.Rezerv" Multiplicity="0..1" />
+    <End Role="Reports" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezerv">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Reports">
+        <PropertyRef Name="reserv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezerv_rooms">
+    <End Role="rooms" Type="Self.room" Multiplicity="0..1" />
+    <End Role="Rezerv" Type="Self.Rezerv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rooms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rezerv">
+        <PropertyRef Name="rooms_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezerv_Stadium">
+    <End Role="Stadium" Type="Self.Stadium" Multiplicity="0..1" />
+    <End Role="Rezerv" Type="Self.Rezerv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stadium">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Rezerv">
+        <PropertyRef Name="stadium_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FootBallEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="comments" EntityType="Self.comment" />
+    <EntitySet Name="Musteris" EntityType="Self.Musteri" />
+    <EntitySet Name="Reports" EntityType="Self.Report" />
+    <EntitySet Name="Rezervs" EntityType="Self.Rezerv" />
+    <EntitySet Name="rooms" EntityType="Self.room" />
+    <EntitySet Name="Stadia" EntityType="Self.Stadium" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_comments_Musteri" Association="Self.FK_comments_Musteri">
+      <End Role="Musteri" EntitySet="Musteris" />
+      <End Role="comments" EntitySet="comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezerv_Musteri" Association="Self.FK_Rezerv_Musteri">
+      <End Role="Musteri" EntitySet="Musteris" />
+      <End Role="Rezerv" EntitySet="Rezervs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reports_Rezerv" Association="Self.FK_Reports_Rezerv">
+      <End Role="Rezerv" EntitySet="Rezervs" />
+      <End Role="Reports" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezerv_rooms" Association="Self.FK_Rezerv_rooms">
+      <End Role="rooms" EntitySet="rooms" />
+      <End Role="Rezerv" EntitySet="Rezervs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezerv_Stadium" Association="Self.FK_Rezerv_Stadium">
+      <End Role="Stadium" EntitySet="Stadia" />
+      <End Role="Rezerv" EntitySet="Rezervs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

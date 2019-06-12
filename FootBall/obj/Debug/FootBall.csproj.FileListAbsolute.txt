@@ -1,0 +1,16 @@
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\FootBall.exe.config
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\FootBall.exe
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\FootBall.pdb
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\FootBall\FootBall\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.csprojAssemblyReference.cache
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.Form1.resources
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.Properties.Resources.resources
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.csproj.GenerateResource.cache
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.csproj.CopyComplete
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.exe
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.pdb
+C:\Users\User\source\repos\FootBall\FootBall\obj\Debug\FootBall.stadion.resources
